@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/slate/bootstrap.min.css">
+
+    <style>
+        .confirmation-buttons {
+            color: white;
+            min-width: 100%;
+        }
+    </style>
+
+    <title>Report Log Creator</title>
+</head>
+
+<body>
+    <h1 style="margin-top:33px;text-align:center;color:#ffd1dc;">
+        Report Log Creator
+    </h1>
+    <form id="reportForm" style="margin-top:33px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-5">
+                    <div class="form-group">
+                        <label for="inputReportID">Report ID</label>
+                        <input type="text" class="form-control" id="inputReportID" aria-describedby="reportIDHelp" placeholder="Enter Report ID">
+                        <small id="reportIDHelp" class="form-text text-muted">The automatically generated ID that correlates to this report.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputReporter">Reporter</label>
+                        <input type="text" class="form-control" id="inputReporter" aria-describedby="reporterHelp" placeholder="Enter Reporter's Username">
+                        <small id="reporterHelp" class="form-text text-muted">The discord/FACEIT Shared username of the user who made the report.</small>
+                    </div>
+                    <div id="reporteeGroups">
+                        <div id="reporteeFormGroup" class="reportee-group form-group">
+                            <label for="inputReportee">Reportee 1</label>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input type="text" class="form-control" id="inputReportee" aria-describedby="repoteeHelp" placeholder="Enter Reportee's Username">
+                                </div>
+                                <div class="col-1">
+                                    <button id="addReporteeButton" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Add another reportee"
+                                        style="min-height:100%;color:white;font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif">➕</button>
+                                </div>
+                            </div>
+                            <small id="repoteeHelp" class="form-text text-muted">The discord/FACEIT Shared username of a user that the Reporter is reporting.</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputMatch">Match Room</label>
+                        <input type="text" class="form-control" id="inputMatch" aria-describedby="matchHelp" placeholder="Enter Report Match Room URL">
+                        <small id="matchHelp" class="form-text text-muted">The match that correlates to the report.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Report Description</label>
+                        <textarea class="form-control" id="inputDescription" rows="5" aria-describedby="descriptionHelp" placeholder="Enter reporter's description of Report"></textarea>
+                        <small id="descriptionHelp" class="form-text text-muted">The description of the report as provided by the reporter.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEvidence">Report Evidence</label>
+                        <textarea class="form-control" id="inputEvidence" rows="5" aria-describedby="evidenceHelp" placeholder="Enter the reporter's additional evidence"></textarea>
+                        <small id="evidenceHelp" class="form-text text-muted">The additional evidence of the report as provided by the reporter.</small>
+                    </div>
+                </div>
+                <div class="col-6 offset-1">
+                    <div class="form-group">
+                        <label for="inputSituation">Official Situation</label>
+                        <textarea class="form-control" id="inputSituation" rows="5" aria-describedby="situationHelp" placeholder="Enter the officially documented situation"></textarea>
+                        <small id="situationHelp" class="form-text text-muted">The situation to be officially logged by the admin.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputInformation">Evidence and Information Gathered</label>
+                        <textarea class="form-control" id="inputInformation" rows="5" aria-describedby="informationHelp" placeholder="Enter the evidence and information gathered"></textarea>
+                        <small id="informationHelp" class="form-text text-muted">Evidence and information that has been gathered to assist in determining the action to take.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAction">Action Taken</label>
+                        <input type="text" class="form-control" id="inputAction" aria-describedby="actionHelp" placeholder="Enter action taken against reportee(s).">
+                        <small id="actionHelp" class="form-text text-muted">The action taken based off of the Evidence and Information Gathered.</small>
+                    </div>
+                    <div class="form-group">
+                        <button id="copyReportButton" type="button" class="btn btn-success btn-lg btn-block" data-toggle="tooltip" data-placement="top"
+                            title="Copied Report to Clipboard" style="min-height:100%;color:white;font-family:'Open
+                        Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif">
+                            Copy Report to Clipboard
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <button id="clearReportButton" type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Are you SURE?" data-content=""
+                            data-html="true">
+                            Clear All Fields
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.3/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
